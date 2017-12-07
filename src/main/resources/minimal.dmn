@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="DMN-Test">
+    <extensionElements>
+      <biodi:bounds x="200" y="200" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable">
+      <input id="input1" label="Input1" camunda:inputVariable="cellInput">
+        <inputExpression id="inputExpression1" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="output1" label="Output" name="output" typeRef="integer" />
+      <rule id="row-101296795-1">
+        <description></description>
+        <inputEntry id="UnaryTests_1wj7cx8">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1pjpgeb">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-101296795-2">
+        <inputEntry id="UnaryTests_1cq117w">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0havof2">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-101296795-3">
+        <inputEntry id="UnaryTests_07jvg6j">
+          <text>3</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18yev5a">
+          <text>3</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-101296795-4">
+        <inputEntry id="UnaryTests_182580y">
+          <text>4</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0cksvdx">
+          <text>4</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-101296795-5">
+        <inputEntry id="UnaryTests_0qj0ayt">
+          <text>5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0aufsul">
+          <text>5</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-101296795-6">
+        <inputEntry id="UnaryTests_10j01vy">
+          <text>6</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xt1b44">
+          <text>6</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-101296795-7">
+        <description></description>
+        <inputEntry id="UnaryTests_1vjumn6">
+          <text>7</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18aaygd">
+          <text>7</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
