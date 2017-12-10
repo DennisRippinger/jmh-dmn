@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20151101/dmn11.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions" name="definitions" namespace="http://camunda.org/schema/1.0/dmn" expressionLanguage="groovy">
   <dmn:decision id="decision" name="DMN-Test">
     <dmn:decisionTable id="decisionTable">
       <dmn:input id="input1" label="Input1" camunda:inputVariable="cellInput">
@@ -43,7 +43,7 @@
 </dmn:outputEntry>
       </dmn:rule>
       <dmn:rule id="row-101296795-7">
-        <dmn:inputEntry id="UnaryTests_1vjumn6">        <dmn:text>7</dmn:text>
+        <dmn:inputEntry id="UnaryTests_1vjumn6">        <dmn:text><![CDATA[cellInput > 7 && cellInput < 9]]></dmn:text>
 </dmn:inputEntry>
         <dmn:outputEntry id="LiteralExpression_18aaygd">        <dmn:text>7</dmn:text>
 </dmn:outputEntry>

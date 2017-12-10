@@ -1,6 +1,8 @@
 package group.msg;
 
-import org.camunda.bpm.dmn.engine.*;
+import org.camunda.bpm.dmn.engine.DmnDecision;
+import org.camunda.bpm.dmn.engine.DmnEngine;
+import org.camunda.bpm.dmn.engine.DmnEngineConfiguration;
 import org.camunda.bpm.model.dmn.Dmn;
 import org.camunda.bpm.model.dmn.DmnModelInstance;
 import org.openjdk.jmh.annotations.*;
@@ -11,6 +13,7 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+
 public class DmnBenchmark {
 
 	@State(Scope.Thread)
@@ -18,7 +21,13 @@ public class DmnBenchmark {
 
 		DmnEngine dmnEngine;
 
-		DmnDecision dmnDecision;
+		DmnDecision groovyDecision;
+
+		DmnDecision jsDecision;
+
+		DmnDecision feelDecision;
+
+		DmnDecision minimalDecision;
 
 		@Setup(Level.Invocation)
 		public void doSetup() {
@@ -26,12 +35,32 @@ public class DmnBenchmark {
 					.createDefaultDmnEngineConfiguration();
 
 			dmnEngine = configuration.buildEngine();
+
+			minimalDecision = getDmnDecision("minimal.dmn");
+			groovyDecision = getDmnDecision("groovy.dmn");
+			feelDecision = getDmnDecision("groovy.dmn");
+			jsDecision = getDmnDecision("js.dmn");
+		}
+
+		private DmnDecision getDmnDecision(String file) {
 			DmnModelInstance dmnModelInstance = Dmn
 					.readModelFromStream(DmnBenchmark.class.getClassLoader()
-							.getResourceAsStream("minimal.dmn"));
+							.getResourceAsStream(file));
 
 			List<DmnDecision> dmnDecisions = dmnEngine.parseDecisions(dmnModelInstance);
-			dmnDecision = dmnDecisions.get(0);
+			return dmnDecisions.get(0);
+		}
+
+	}
+
+	@State(Scope.Thread)
+	public static class InputMap {
+
+		Map<String, Object> input;
+
+		@Setup(Level.Trial)
+		public void doSetup() {
+			input = Collections.singletonMap("cellInput", ThreadLocalRandom.current().nextInt(7));
 		}
 
 	}
@@ -40,10 +69,30 @@ public class DmnBenchmark {
 	@Benchmark
 	@BenchmarkMode(Mode.Throughput)
 	@OutputTimeUnit(TimeUnit.SECONDS)
-	public void testMethod(DmnEngineState state) {
-		Map<String, Object> input = Collections.singletonMap("cellInput", ThreadLocalRandom.current().nextInt(7));
+	public void feelDecision(DmnEngineState state, InputMap inputMap) {
+		state.dmnEngine.evaluateDecision(state.feelDecision, inputMap.input);
+	}
 
-		state.dmnEngine.evaluateDecision(state.dmnDecision, input);
+	@Benchmark
+	@BenchmarkMode(Mode.Throughput)
+	@OutputTimeUnit(TimeUnit.SECONDS)
+	public void jsDecision(DmnEngineState state, InputMap inputMap) {
+		state.dmnEngine.evaluateDecision(state.jsDecision, inputMap.input);
+	}
+
+	@Benchmark
+	@BenchmarkMode(Mode.Throughput)
+	@OutputTimeUnit(TimeUnit.SECONDS)
+	public void groovyDecision(DmnEngineState state, InputMap inputMap) {
+		state.dmnEngine.evaluateDecision(state.groovyDecision, inputMap.input);
+	}
+
+
+	@Benchmark
+	@BenchmarkMode(Mode.Throughput)
+	@OutputTimeUnit(TimeUnit.SECONDS)
+	public void minimalDecision(DmnEngineState state, InputMap inputMap) {
+		state.dmnEngine.evaluateDecision(state.minimalDecision, inputMap.input);
 	}
 
 }

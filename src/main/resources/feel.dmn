@@ -43,7 +43,7 @@
 </dmn:outputEntry>
       </dmn:rule>
       <dmn:rule id="row-101296795-7">
-        <dmn:inputEntry id="UnaryTests_1vjumn6">        <dmn:text>7</dmn:text>
+        <dmn:inputEntry id="UnaryTests_1vjumn6">        <dmn:text>[7..8]</dmn:text>
 </dmn:inputEntry>
         <dmn:outputEntry id="LiteralExpression_18aaygd">        <dmn:text>7</dmn:text>
 </dmn:outputEntry>
