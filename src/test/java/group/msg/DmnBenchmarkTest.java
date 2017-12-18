@@ -18,7 +18,6 @@ public class DmnBenchmarkTest {
 	@Before
 	public void setUp() throws Exception {
 		DmnBenchmark.DmnEngineState dmnEngineState = new DmnBenchmark.DmnEngineState();
-		dmnEngineState.doSetup();
 		dmnEngine = dmnEngineState.dmnEngine;
 		dmnDecision = dmnEngineState.groovyDecision;
 	}
